@@ -23,7 +23,7 @@ app.use(
 app.use(cors());
 app.use(allowCrossDomain);
 
-app.get("/api/insta-auth", async (req, res) => {
+app.post("/api/insta-auth", async (req, res) => {
   try {
     const result = await axios.post(
       "https://api.instagram.com/oauth/access_token",
