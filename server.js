@@ -5,6 +5,8 @@ const axios = require("axios");
 
 const { readdirSync } = require("fs");
 const { query } = require("express");
+const { request } = require("request");
+
 require("dotenv").config();
 
 // app
@@ -26,11 +28,12 @@ app.use(allowCrossDomain);
 
 app.post("/api/insta-auth", async (req, res) => {
   try {
-    const result = await axios.post(
-      "https://api.instagram.com/oauth/access_token",
-      JSON.stringify(req.body)
-    );
-    res.json(result);
+    let result = await request.post({
+      url: "https://api.instagram.com/oauth/access_token",
+      form: req.body,
+    });
+    let accessToken = JSON.parse(result).access_token;
+    res.json(accessToken);
   } catch (error) {
     console.log(err.message);
   }
