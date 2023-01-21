@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const axios = require("axios");
 
 const { readdirSync } = require("fs");
+const { query } = require("express");
 require("dotenv").config();
 
 // app
@@ -27,7 +28,7 @@ app.post("/api/insta-auth", async (req, res) => {
   try {
     const result = await axios.post(
       "https://api.instagram.com/oauth/access_token",
-      req.body
+      JSON.stringify(req.body)
     );
     res.json(result);
   } catch (error) {
