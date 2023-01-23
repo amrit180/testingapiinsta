@@ -27,20 +27,21 @@ app.use(cors());
 app.use(allowCrossDomain);
 
 app.post("/api/insta-auth", async (req, res) => {
-  res.json("hellow ");
-  // await fetch("https://api.instagram.com/oauth/access_token", {
-  //   method: "post",
-  //   body: JSON.stringify(req.body),
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //   },
-  // })
-  //   .then((res) => {
-  //     console.log(res.json());
-  //     res.json(res);
-  //   })
-  //   .catch((err) => console.log(error));
+  // res.json("hellow ");
+  await fetch("https://api.instagram.com/oauth/access_token", {
+    method: "post",
+    body: JSON.stringify(req.body),
+    headers: {
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  })
+    .then((res) => {
+      console.log(res.json());
+      res.json(res);
+    })
+    .catch((err) => console.log(error));
 });
 
 const port = process.env.PORT || 8000;
