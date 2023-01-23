@@ -38,6 +38,7 @@ app.post("/api/insta-auth", async (req, res) => {
     },
   });
   console.log(resp.json());
+  console.log(resp);
   res.json(resp);
 });
 
