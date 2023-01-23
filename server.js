@@ -26,17 +26,21 @@ app.use(
 app.use(cors());
 app.use(allowCrossDomain);
 
-app.post("/api/insta-auth", async (req, res) => {
-  try {
-    let result = await request.post({
-      url: "https://api.instagram.com/oauth/access_token",
-      form: req.body,
-    });
-    let accessToken = JSON.parse(result).access_token;
-    res.json(accessToken);
-  } catch (error) {
-    console.log(err.message);
-  }
+app.post("/api/insta-auth", function (req, res) {
+  var options = {
+    method: "POST",
+    url: "https://api.instagram.com/oauth/access_token",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    form: req.body,
+  };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    var data = JSON.parse(body);
+    res.json(data);
+  });
 });
 
 const port = process.env.PORT || 8000;
