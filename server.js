@@ -26,25 +26,35 @@ app.use(
 app.use(cors());
 app.use(allowCrossDomain);
 
-app.post("/api/insta-auth", function (req, res) {
-  var options = {
-    method: "POST",
-    url: "https://api.instagram.com/oauth/access_token",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    form: req.body,
-  };
+app.post("/api/insta-auth", async (req, res) => {
+  // var options = {
+  //   method: "POST",
+  //   url: "https://api.instagram.com/oauth/access_token",
+  //   headers: {
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //   },
+  //   form: req.body,
+  // };
 
-  request(options, function (error, response, body) {
-    if (error) {
-      console.log("error", error);
-      throw new Error(error);
-    }
-    console.log(body);
-    var data = JSON.parse(body);
-    res.json(data);
-  });
+  // request(options, function (error, response, body) {
+  //   if (error) {
+  //     console.log("error", error);
+  //     throw new Error(error);
+  //   }
+  //   console.log(body);
+  //   var data = JSON.parse(body);
+  //   res.json(data);
+  // });
+  await fetch("https://api.instagram.com/oauth/access_token", {
+    method: "post",
+    body: JSON.stringify(req.body),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => {
+      console.log(res.json());
+      res.json(res);
+    })
+    .catch((err) => console.log(error));
 });
 
 const port = process.env.PORT || 8000;
