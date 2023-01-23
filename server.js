@@ -28,7 +28,7 @@ app.use(allowCrossDomain);
 
 app.post("/api/insta-auth", async (req, res) => {
   // res.json("hellow ");
-  const res = await fetch("https://api.instagram.com/oauth/access_token", {
+  const resp = await fetch("https://api.instagram.com/oauth/access_token", {
     method: "post",
     body: JSON.stringify(req.body),
     headers: {
@@ -37,8 +37,8 @@ app.post("/api/insta-auth", async (req, res) => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
-  console.log(res.json());
-  res.json(res);
+  console.log(resp.json());
+  res.json(resp);
 });
 
 const port = process.env.PORT || 8000;
