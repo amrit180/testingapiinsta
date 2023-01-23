@@ -37,6 +37,7 @@ app.post("/api/insta-auth", async (req, res) => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
+  if (!resp.ok) throw new Error(`unexpected response ${response.statusText}`);
   console.log(resp.json());
   console.log(resp);
   res.json(resp);
