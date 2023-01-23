@@ -5,7 +5,7 @@ const axios = require("axios");
 
 const { readdirSync } = require("fs");
 const { query } = require("express");
-const { request } = require("request");
+const fetch = require("node-fetch");
 
 require("dotenv").config();
 
