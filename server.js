@@ -37,7 +37,11 @@ app.post("/api/insta-auth", function (req, res) {
   };
 
   request(options, function (error, response, body) {
-    if (error) throw new Error(error);
+    if (error) {
+      console.log("error", error);
+      throw new Error(error);
+    }
+    console.log(body);
     var data = JSON.parse(body);
     res.json(data);
   });
